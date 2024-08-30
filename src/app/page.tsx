@@ -1,11 +1,13 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <main className="tex">
-      <div className="text-2xl">
-        <p>hello</p>
+    <div className="text-white text-4xl underline">
+      Home
+      <div>
+        <Button>Click me</Button>
       </div>
-    </main>
+    </div>
   );
 }
