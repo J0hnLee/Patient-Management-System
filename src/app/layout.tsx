@@ -7,16 +7,16 @@ import { ThemeProvider } from "@/components/theme-provider";
 const fontSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-sans"
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
   title: "Leadway CarePulse",
-  description: "A healthcare management system"
+  description: "A healthcare management system",
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {

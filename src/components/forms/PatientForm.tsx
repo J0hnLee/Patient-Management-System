@@ -16,7 +16,7 @@ export enum FormFieldType {
   PHONE_INPUT = "phoneInput",
   DATE_PICKER = "datePicker",
   SELECT = "select",
-  SKELETON = "skeleton"
+  SKELETON = "skeleton",
 }
 const PatientForm = () => {
   // 1. Define your form.
@@ -25,15 +25,15 @@ const PatientForm = () => {
     defaultValues: {
       username: "",
       email: "",
-      phone: ""
-    }
+      phone: "",
+    },
   });
 
   // 2. Define a submit handler.
   async function onSubmit({
     username,
     email,
-    phone
+    phone,
   }: z.infer<typeof UserFormValidation>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -42,8 +42,10 @@ const PatientForm = () => {
       const userData = {
         username,
         email,
-        phone
+        phone,
       };
+      console.log(userData);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +56,7 @@ const PatientForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
-          <h1 className="header">Hi There!</h1>
+          <h1 className="header ">Hi There!</h1>
           <p className="text-dark-700">Schedule your first appointment.</p>
         </section>
         <CustomFormField
