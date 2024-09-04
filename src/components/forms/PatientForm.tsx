@@ -1,13 +1,13 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "./CustomFormField";
 
-import SubmitButton from "@/components/submitButton";
-import { useState } from "react";
+import SubmitButton from "@/components/SubmitButton";
+import { Suspense, useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 export enum FormFieldType {
   INPUT = "input",
@@ -16,7 +16,7 @@ export enum FormFieldType {
   PHONE_INPUT = "phoneInput",
   DATE_PICKER = "datePicker",
   SELECT = "select",
-  SKELETON = "skeleton",
+  SKELETON = "skeleton"
 }
 const PatientForm = () => {
   // 1. Define your form.
@@ -25,15 +25,15 @@ const PatientForm = () => {
     defaultValues: {
       username: "",
       email: "",
-      phone: "",
-    },
+      phone: ""
+    }
   });
 
   // 2. Define a submit handler.
   async function onSubmit({
     username,
     email,
-    phone,
+    phone
   }: z.infer<typeof UserFormValidation>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -42,7 +42,7 @@ const PatientForm = () => {
       const userData = {
         username,
         email,
-        phone,
+        phone
       };
       console.log(userData);
       setIsLoading(false);
@@ -56,7 +56,7 @@ const PatientForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
-          <h1 className="header ">Hi There!</h1>
+          <h1 className="header">Hi There!</h1>
           <p className="text-dark-700">Schedule your first appointment.</p>
         </section>
         <CustomFormField
