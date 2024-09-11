@@ -9,6 +9,8 @@ import CustomFormField from "./CustomFormField";
 import SubmitButton from "@/components/SubmitButton";
 import { Suspense, useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
+import { createUser } from "@/lib/actions/patient.actions";
+
 export enum FormFieldType {
   INPUT = "input",
   CHECKBOX = "checkbox",
@@ -39,15 +41,17 @@ const PatientForm = () => {
     // ✅ This will be type-safe and validated.
     setIsLoading(true);
     try {
-      const userData = {
-        username,
-        email,
-        phone
-      };
-      console.log(userData);
-      setIsLoading(false);
+      const newUser = await createUser({ username, email, phone });
+      console.log(newUser);
+      if (newUser) {
+        // TODO: 處理成功情況，例如重定向或顯示成功消息
+        console.log(newUser);
+      }
     } catch (error) {
-      console.log(error);
+      // TODO: 顯示錯誤消息給用戶
+      console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }
   const [isLoading, setIsLoading] = useState(false);

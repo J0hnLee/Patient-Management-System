@@ -1,12 +1,15 @@
+"use client"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 export default function Home() {
   return (
     <div className="flex h-screen max-h-screen">
       {/* TODO: OTP verification */}
-      <section className="remove-scrollbar container my-auto">
+            <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
           <Image
             alt="logo"
@@ -25,6 +28,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
+            <p>test</p>
       </section>
       <Image
         src="/assets/images/onboarding-img.png"
