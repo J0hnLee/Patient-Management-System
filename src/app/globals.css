@@ -24,6 +24,12 @@
     /* background: #1e2238; */
     background: transparent;
   }
+  
+}
+@layer base {
+  body {
+    @apply text-white;
+  }
 }
 
 @layer utilities {
