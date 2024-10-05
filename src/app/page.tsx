@@ -28,7 +28,6 @@ export default function Home() {
             </Link>
           </div>
         </div>
-            <p>test</p>
       </section>
       <Image
         src="/assets/images/onboarding-img.png"

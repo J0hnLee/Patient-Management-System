@@ -4,11 +4,12 @@ import Link from 'next/link'
 import RegisterForm from '@/components/forms/RegisterForm'
 import { getUser } from '@/lib/actions/patient.actions';
 import { SearchParamsProps } from '@/types';
-const Register = async ({params:{userId}}:SearchParamsProps) => {
-    const user = await getUser(userId);
+//const Register = async ({params:{userId}}:SearchParamsProps) => {
+  const Register = async ({params:{userId}}:SearchParamsProps) => {
+
+  const user = await getUser(userId);
   return (
     <div className="flex h-screen max-h-screen">
-      {/* TODO: OTP verification */}
       <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
           <Image

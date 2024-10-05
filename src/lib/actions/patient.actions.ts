@@ -28,6 +28,7 @@ export const createUser = async (user: CreateUserParams) => {
 export const getUser = async (userId: string) => {
     try {
         const user = await users.get(userId);
+        //console.table(user);
         return parseStringify(user);
     } catch (error: any) {
         console.log(error);
