@@ -10,17 +10,9 @@ import SubmitButton from "@/components/SubmitButton";
 import { Suspense, useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
 import { createUser } from "@/lib/actions/patient.actions";
+import { FormFieldType } from "./PatientForm";
 
-export enum FormFieldType {
-  INPUT = "input",
-  CHECKBOX = "checkbox",
-  TEXTAREA = "textarea",
-  PHONE_INPUT = "phoneInput",
-  DATE_PICKER = "datePicker",
-  SELECT = "select",
-  SKELETON = "skeleton"
-}
-const PatientForm = () => {
+const RegisterForm = ({user}:{user:User}) => {
   const router = useRouter();
 
   // 1. Define your form.
@@ -75,23 +67,9 @@ const PatientForm = () => {
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />
-        <CustomFormField
-          fieldType={FormFieldType.INPUT}
-          control={form.control}
-          name="email"
-          label="Email"
-          placeholder="leadwayrx@gmail.com"
-          iconSrc="/assets/icons/email.svg"
-          iconAlt="email"
-        />
+        
 
-        <CustomFormField
-          fieldType={FormFieldType.PHONE_INPUT}
-          control={form.control}
-          name="phone"
-          label="電話"
-          placeholder=""
-        />
+       
 
         <SubmitButton isLoading={isLoading}>提交</SubmitButton>
       </form>
@@ -99,4 +77,4 @@ const PatientForm = () => {
   );
 };
 
-export default PatientForm;
+export default RegisterForm;
