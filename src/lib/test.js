@@ -1,11 +1,8 @@
-function trace(arg) {
-    console.log(arg.size);
-    return arg;
+function f() {
+    var value = Math.random();
+    return function () { return value; };
 }
-function id(arg1, arg2) {
-    return arg1;
-}
-var str = "Hello";
-var str2 = { value: "hello", test: 3 };
-str2.test = 5;
-console.log(str2.test);
+var g = f();
+// 数组中的 3 个函数，每个都与来自对应的 f() 的词法环境相关联
+var arr = [g(), g(), g()];
+console.log(arr);

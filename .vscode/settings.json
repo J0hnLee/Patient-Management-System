@@ -1,0 +1,9 @@
+{
+    "cursor.aipreview.enabled": false,
+    "cursor.chat.showSuggestedFiles": true,
+    "supermaven.allowGitignore": false,
+    "supermaven.enable": {},
+    
+    "editor.inlineSuggest.enabled": true,
+    "editor.inlineCompletionsPreview": true
+}
