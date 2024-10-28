@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
 import CustomFormField from "./CustomFormField";
-
+import { useRouter } from "next/navigation";
 import SubmitButton from "@/components/SubmitButton";
 import { Suspense, useState } from "react";
 import { UserFormValidation } from "@/lib/validation";
@@ -18,14 +18,15 @@ export enum FormFieldType {
   PHONE_INPUT = "phoneInput",
   DATE_PICKER = "datePicker",
   SELECT = "select",
-  SKELETON = "skeleton"
 }
 const PatientForm = () => {
+  const router = useRouter();
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       phone: ""
     }
@@ -33,18 +34,23 @@ const PatientForm = () => {
 
   // 2. Define a submit handler.
   async function onSubmit({
-    username,
+    name,
     email,
-    phone
+    phone,
+
   }: z.infer<typeof UserFormValidation>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    console.log("Form submitted with values:", { name, email, phone }); // 添加日誌
     setIsLoading(true);
     try {
-      const newUser = await createUser({ username, email, phone });
+      const ww=form.getValues()
+      console.log(ww)
+      const newUser = await createUser({ name, email, phone });
       console.log(newUser);
       if (newUser) {
         // TODO: 處理成功情況，例如重定向或顯示成功消息
+        router.push(`/patients/${newUser.$id}/register`);
         console.log(newUser);
       }
     } catch (error) {
@@ -54,8 +60,9 @@ const PatientForm = () => {
       setIsLoading(false);
     }
   }
+  console.log(form.getValues())
+  
   const [isLoading, setIsLoading] = useState(false);
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
@@ -66,7 +73,7 @@ const PatientForm = () => {
         <CustomFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
-          name="username"
+          name="name"
           label="全名"
           placeholder="John Doe"
           iconSrc="/assets/icons/user.svg"
@@ -90,6 +97,7 @@ const PatientForm = () => {
           placeholder=""
         />
 
+   
         <SubmitButton isLoading={isLoading}>提交</SubmitButton>
       </form>
     </Form>
