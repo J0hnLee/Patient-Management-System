@@ -86,3 +86,24 @@ export const registerPatient= async ({identificationDocument,...patient}:Registe
     }
 
 }
+
+export const getPatient = async (userId: string) => {
+    try {
+        //console.log("userId is", userId);
+        const patients = await databases.listDocuments(
+            NEXT_PUBLIC_DATABASE_ID!, // databaseId
+            NEXT_PUBLIC_PATIENT_COLLECTION_ID as string, // collectionId
+            //[Query.equal("email", ["jof@gmail.com","jof@gmail.com"])],
+            //Query.equal只能回傳第一個符合條件的結果，不能回傳所有符合條件的結果
+            [Query.contains("userId", userId)],
+
+
+        );
+        // console.log("patients",patients.documents.length);
+        // console.log("hello")
+        // console.log("from database",patients);
+        return parseStringify(patients.documents[0]);
+    } catch (error: any) {
+        console.log(error);
+    }
+}
