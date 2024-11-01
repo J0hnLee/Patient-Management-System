@@ -1,15 +1,15 @@
-"use client"
+"use client";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import PatientForm from "@/components/forms/PatientForm";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-export default function Home() {
+import PassKeyModal from "@/components/PassKeyModal";
+export default function Home({ searchParams }: SearchParamProps) {
+  const isAdmin = searchParams?.admin === "true";
   return (
     <div className="flex h-screen max-h-screen">
       {/* TODO: OTP verification */}
-            <section className="remove-scrollbar container my-auto">
+      {isAdmin && <PassKeyModal isAdmin={isAdmin} />}
+      <section className="remove-scrollbar container my-auto">
         <div className="sub-container max-w-[496px]">
           <Image
             alt="logo"
