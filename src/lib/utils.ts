@@ -71,3 +71,23 @@ export const formatDateTime = (dateString: Date | string, timeZone: string = Int
     timeOnly: formattedTime,
   };
 };
+
+export const encryptKey = (key: string) => {
+  // const keyArray = key.split("");
+  // const encryptedKeyArray = keyArray.map((char, index) => {
+  //   const encryptedChar = char.charCodeAt(0) + index;
+  //   return encryptedChar.toString();
+  // });
+  // return encryptedKeyArray.join("");
+  return key
+};
+
+export const decryptKey = (key: string) => {
+  // const keyArray = key.split("");
+  // const decryptedKeyArray = keyArray.map((char, index) => {
+  //   const decryptedChar = char.charCodeAt(0) - index;
+  //   return decryptedChar.toString();
+  // });
+  // return decryptedKeyArray.join("");
+  return key
+};

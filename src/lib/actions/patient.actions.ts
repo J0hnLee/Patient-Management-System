@@ -44,12 +44,13 @@ export const createUser = async (user: CreateUserParams) => {
 export const getUser = async (userId: string) => {
     try {
         const user = await users.get(userId);
+        // console.log("🚀 ~ getUser ~ user:", user)
+        // console.log("🚀 ~ getUser ~ user:", user)
         return parseStringify(user);
     } catch (error: any) {
         console.log(error);
     }
 }
-
 export const registerPatient= async ({identificationDocument,...patient}:RegisterUserParams)=>{
     //console.log('this',identificationDocument)
     try {
