@@ -33,72 +33,72 @@ export const createAppointment = async (
 };
 
 //  GET RECENT APPOINTMENTS
-export const getRecentAppointmentList = async () => {
-  try {
-    const appointments = await databases.listDocuments(
-        NEXT_PUBLIC_DATABASE_ID!,
-      NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!,
-      [Query.orderDesc("$createdAt")]
-    );
+// export const getRecentAppointmentList = async () => {
+//   try {
+//     const appointments = await databases.listDocuments(
+//         NEXT_PUBLIC_DATABASE_ID!,
+//       NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!,
+//       [Query.orderDesc("$createdAt")]
+//     );
 
-    // const scheduledAppointments = (
-    //   appointments.documents as Appointment[]
-    // ).filter((appointment) => appointment.status === "scheduled");
+//     // const scheduledAppointments = (
+//     //   appointments.documents as Appointment[]
+//     // ).filter((appointment) => appointment.status === "scheduled");
 
-    // const pendingAppointments = (
-    //   appointments.documents as Appointment[]
-    // ).filter((appointment) => appointment.status === "pending");
+//     // const pendingAppointments = (
+//     //   appointments.documents as Appointment[]
+//     // ).filter((appointment) => appointment.status === "pending");
 
-    // const cancelledAppointments = (
-    //   appointments.documents as Appointment[]
-    // ).filter((appointment) => appointment.status === "cancelled");
+//     // const cancelledAppointments = (
+//     //   appointments.documents as Appointment[]
+//     // ).filter((appointment) => appointment.status === "cancelled");
 
-    // const data = {
-    //   totalCount: appointments.total,
-    //   scheduledCount: scheduledAppointments.length,
-    //   pendingCount: pendingAppointments.length,
-    //   cancelledCount: cancelledAppointments.length,
-    //   documents: appointments.documents,
-    // };
+//     // const data = {
+//     //   totalCount: appointments.total,
+//     //   scheduledCount: scheduledAppointments.length,
+//     //   pendingCount: pendingAppointments.length,
+//     //   cancelledCount: cancelledAppointments.length,
+//     //   documents: appointments.documents,
+//     // };
 
-    const initialCounts = {
-      scheduledCount: 0,
-      pendingCount: 0,
-      cancelledCount: 0,
-    };
+//     const initialCounts = {
+//       scheduledCount: 0,
+//       pendingCount: 0,
+//       cancelledCount: 0,
+//     };
 
-    const counts = (appointments.documents as Appointment[]).reduce(
-      (acc, appointment) => {
-        switch (appointment.status) {
-          case "scheduled":
-            acc.scheduledCount++;
-            break;
-          case "pending":
-            acc.pendingCount++;
-            break;
-          case "cancelled":
-            acc.cancelledCount++;
-            break;
-        }
-        return acc;
-      },
-      initialCounts
-    );
+//     const counts = (appointments.documents as Appointment[]).reduce(
+//       (acc, appointment) => {
+//         switch (appointment.status) {
+//           case "scheduled":
+//             acc.scheduledCount++;
+//             break;
+//           case "pending":
+//             acc.pendingCount++;
+//             break;
+//           case "cancelled":
+//             acc.cancelledCount++;
+//             break;
+//         }
+//         return acc;
+//       },
+//       initialCounts
+//     );
 
-    const data = {
-      totalCount: appointments.total,
-      ...counts,
-      documents: appointments.documents,
-    };
+//     const data = {
+//       totalCount: appointments.total,
+//       ...counts,
+//       documents: appointments.documents,
+//     };
 
-    return parseStringify(data);
-  } catch (error) {
-    console.error(
-      "An error occurred while retrieving the recent appointments:",
-      error
-    );
-  }
-};
+//     return parseStringify(data);
+//   } catch (error) {
+//     console.error(
+//       "An error occurred while retrieving the recent appointments:",
+//       error
+//     );
+//   }
+// };
 
 //  SEND SMS NOTIFICATION
 export const sendSMSNotification = async (userId: string, content: string) => {
@@ -162,3 +162,71 @@ export const getAppointment = async (appointmentId: string) => {
     );
   }
 };
+
+export const getRecentAppointmentList = async () => {
+  try {
+    const appointments = await databases.listDocuments(
+        NEXT_PUBLIC_DATABASE_ID!,
+      NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!,
+      [Query.orderDesc("$createdAt")]
+    );
+
+    // const scheduledAppointments = (
+    //   appointments.documents as Appointment[]
+    // ).filter((appointment) => appointment.status === "scheduled");
+
+    // const pendingAppointments = (
+    //   appointments.documents as Appointment[]
+    // ).filter((appointment) => appointment.status === "pending");
+
+    // const cancelledAppointments = (
+    //   appointments.documents as Appointment[]
+    // ).filter((appointment) => appointment.status === "cancelled");
+
+    // const data = {
+    //   totalCount: appointments.total,
+    //   scheduledCount: scheduledAppointments.length,
+    //   pendingCount: pendingAppointments.length,
+    //   cancelledCount: cancelledAppointments.length,
+    //   documents: appointments.documents,
+    // };
+
+    const initialCounts = {
+      scheduledCount: 0,
+      pendingCount: 0,
+      cancelledCount: 0,
+    };
+
+    const counts = (appointments.documents as Appointment[]).reduce(
+      (acc, appointment) => {
+        switch (appointment.status) {
+          case "scheduled":
+            acc.scheduledCount++;
+            break;
+          case "pending":
+            acc.pendingCount++;
+            break;
+          case "cancelled":
+            acc.cancelledCount++;
+            break;
+        }
+        return acc;
+      },
+      initialCounts
+    );
+
+    const data = {
+      totalCount: appointments.total,
+      ...counts,
+      documents: appointments.documents,
+    };
+    // console.log("🚀 ~ Appointment ~ data:", data);
+
+    return parseStringify(data);
+  } catch (error) {
+    console.error(
+      "An error occurred while retrieving the recent appointments:",
+      error
+    );
+  }
+};  
