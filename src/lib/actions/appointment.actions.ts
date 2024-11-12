@@ -138,6 +138,7 @@ export const updateAppointment = async ({
     const smsMessage = `Greetings from CarePulse. ${type === "schedule" ? `Your appointment is confirmed for ${formatDateTime(appointment.schedule!, timeZone).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.schedule!, timeZone).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
     await sendSMSNotification(userId, smsMessage);
 
+    //revalidatePath 可以重抓data
     revalidatePath("/admin");
     return parseStringify(updatedAppointment);
   } catch (error) {

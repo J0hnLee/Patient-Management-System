@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import StatusBadage from "../StatusBadage";
+import AppointmentModal from "../AppointmentModal";
+import App from "next/app";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Payment = {
@@ -84,7 +86,27 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     header: () => <div className="pl-4">Actions</div>,
     cell: ({ row }) => {
-      return <div className="flex gap-1">AppointmentModal</div>;
+      const appointment = row.original;
+      return (
+        <div className="flex flex-row gap-2">
+          <AppointmentModal
+            type="schedule"
+            patientId={appointment.patient.id}
+            userId={appointment.userId}
+            appointment={appointment}
+            title="Schedule Appointment"
+            description="Please full in the following details to schedule."
+          />
+          <AppointmentModal
+            patientId={appointment.patient.$id}
+            userId={appointment.userId}
+            appointment={appointment}
+            type="cancel"
+            title="Cancel Appointment"
+            description="Are you sure you want to cancel your appointment?"
+          />
+        </div>
+      );
     },
   },
 ];
